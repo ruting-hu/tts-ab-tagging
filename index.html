@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TTS A/B tagging</title>
+<style>
+  :root{--bg:#0f1116;--panel:#181b22;--ink:#e8eaed;--mut:#9aa0aa;--acc:#4c8bf5;--ok:#2ea043;--line:#2a2f3a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:760px;margin:0 auto;padding:16px}
+  header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;position:sticky;top:8px;z-index:5}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  label{color:var(--mut);font-size:13px}
+  select,input,button{font:inherit;color:var(--ink);background:#11141a;border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+  button{cursor:pointer}
+  button:hover{border-color:var(--acc)}
+  .bar{height:6px;background:#11141a;border-radius:6px;overflow:hidden;margin:14px 0 6px}
+  .bar>i{display:block;height:100%;background:var(--ok);width:0}
+  .prompt{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:12px 14px;margin:8px 0 14px;font-size:16px}
+  .ref{background:#15212e;border:1px solid #1e3346;border-radius:10px;padding:10px 12px;margin-bottom:12px}
+  .ref h4{margin:0 0 6px;font-size:13px;color:#7fb2ff;letter-spacing:.3px}
+  .ab{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .card h3{margin:0 0 8px;font-size:22px;letter-spacing:1px}
+  audio{width:100%}
+  .qrow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px}
+  .qrow .qlabel{font-size:14px;margin-bottom:8px}
+  .choices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .choices button{padding:12px;font-size:15px;font-weight:600}
+  .choices .picked{outline:2px solid var(--ok);border-color:var(--ok);background:#16261b}
+  .nav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+  .nav button{padding:10px}
+  .muted{color:var(--mut);font-size:13px}
+  .pill{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:20px;padding:2px 8px}
+  .done{background:#13251a;border:1px solid #1f7a3a;border-radius:12px;padding:14px;text-align:center;margin-top:14px}
+  a{color:var(--acc)}
+  details.tallywrap{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+  details.tallywrap>summary{cursor:pointer;font-weight:600;list-style:revert}
+  table.tally{width:100%;border-collapse:collapse;margin:10px 0 4px}
+  table.tally th,table.tally td{border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+  table.tally th{color:var(--mut);font-weight:600}
+  table.tally td.m0{color:#c9a6ff;font-weight:600}
+  table.tally td.m1{color:#ffc08a;font-weight:600}
+  table.tally td.ax{color:var(--ink);text-align:left}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="row">
+      <label for="acct">Account</label>
+      <select id="acct" title="who is tagging"></select>
+      <button id="addAcct" title="add a new tagger">+ add</button>
+    </div>
+    <div class="row">
+      <span class="pill" id="count">nat 0/0 · sim 0/0</span>
+      <button id="dl" title="download all of this account's votes">⬇ my votes (CSV)</button>
+    </div>
+  </header>
+
+  <div class="bar"><i id="prog"></i></div>
+  <div class="muted" id="status"></div>
+
+  <div class="prompt" id="prompt">…</div>
+
+  <!-- the three clips, shown ONCE; both questions below reuse them -->
+  <div class="ref" id="refBlock">
+    <h4>🎯 REFERENCE — the target speaker</h4>
+    <audio id="refAudio" controls preload="none"></audio>
+  </div>
+  <div class="ab">
+    <div class="card"><h3>A</h3><audio id="aAudio" controls preload="none"></audio></div>
+    <div class="card"><h3>B</h3><audio id="bAudio" controls preload="none"></audio></div>
+  </div>
+
+  <!-- both axes, judged on this one screen -->
+  <div class="qrow">
+    <div class="qlabel"><b>Naturalness</b> — which sounds more natural / human-like? <span class="muted">(prosody &amp; delivery; ignore words &amp; recording quality)</span></div>
+    <div class="choices">
+      <button data-kind="nat" data-side="A">◀ A</button>
+      <button data-kind="nat" data-side="tie">🤝 Tie</button>
+      <button data-kind="nat" data-side="B">B ▶</button>
+    </div>
+  </div>
+  <div class="qrow">
+    <div class="qlabel">🎯 <b>Speaker similarity</b> — which sounds like the <b>same person</b> as the reference? <span class="muted">(identity / timbre)</span></div>
+    <div class="choices">
+      <button data-kind="sim" data-side="A">◀ A</button>
+      <button data-kind="sim" data-side="tie">🤝 Tie</button>
+      <button data-kind="sim" data-side="B">B ▶</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button id="prev">← Prev</button>
+    <button id="next">Next →</button>
+    <button id="jump">⏭ Next incomplete</button>
+  </div>
+
+  <details class="tallywrap" id="tallyWrap" open>
+    <summary>📊 Live model tally — this account, so far</summary>
+    <div id="tally"></div>
+    <div class="muted">Counts decoded live from your picks — no CSV needed. <i>win-rate = wins ÷ decided (non-tie).</i>
+    Heads-up: seeing which model leads can bias you — collapse this for a strictly blind pass.</div>
+  </details>
+
+  <div class="done" id="done" style="display:none"></div>
+  <p class="muted">Votes save in <b>this browser</b> under your account and resume automatically. Click
+  <b>⬇ my votes (CSV)</b> when done and send the file. If the download is blocked inside Notion, use
+  <a id="newtab" target="_blank" rel="noopener">open in new tab ↗</a> and download there.</p>
+</div>
+
+<script>
+const CONFIG = { starterAccounts: ["ruting"] };
+const $ = id => document.getElementById(id);
+const LS_VOTES="ttsab_votes_v2", LS_ACCTS="ttsab_accounts_v1", LS_CUR="ttsab_cur_v1";
+const AXES = [["nat","naturalness"],["sim","similarity"]];
+
+function xfnv1a(s){let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function orderFor(account,n){const idx=[...Array(n).keys()];const r=mulberry32(xfnv1a("ord|"+account));
+  for(let i=n-1;i>0;i--){const j=Math.floor(r()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}return idx}
+
+let M=null, ORDER=[], idx=0;
+let accounts = JSON.parse(localStorage.getItem(LS_ACCTS)||"null") || CONFIG.starterAccounts.slice();
+let account  = localStorage.getItem(LS_CUR) || accounts[0];
+let votes    = JSON.parse(localStorage.getItem(LS_VOTES)||"{}");   // {account:{item_id:{nat,sim,ts}}}
+
+const bag = ()=> (votes[account] ||= {});
+function persist(){localStorage.setItem(LS_VOTES,JSON.stringify(votes));
+  localStorage.setItem(LS_ACCTS,JSON.stringify(accounts));localStorage.setItem(LS_CUR,account);}
+function renderAccounts(){$("acct").innerHTML=accounts.map(a=>`<option ${a===account?"selected":""}>${a}</option>`).join("")}
+const complete = v => v && v.nat && v.sim;
+function firstIncomplete(){const b=bag();for(let p=0;p<ORDER.length;p++){if(!complete(b[M.items[ORDER[p]].item_id]))return p}return ORDER.length-1}
+
+function render(){
+  if(!M)return;
+  idx=Math.max(0,Math.min(idx,ORDER.length-1));
+  const it=M.items[ORDER[idx]], b=bag(), v=b[it.item_id]||{};
+  $("prompt").textContent = "“"+it.text+"”";
+  $("refAudio").src=it.ref; $("aAudio").src=it.A; $("bAudio").src=it.B;
+  let nDone=0,sDone=0;
+  for(const id in b){ if(b[id].nat)nDone++; if(b[id].sim)sDone++; }
+  const tot=ORDER.length;
+  $("count").textContent=`nat ${nDone}/${tot} · sim ${sDone}/${tot}`;
+  $("prog").style.width=(100*(nDone+sDone)/(2*tot))+"%";
+  $("status").innerHTML=`item <b>${idx+1}/${tot}</b> · <code>${it.item_id}</code>`
+    + (complete(v)?` · <span style="color:var(--ok)">both done</span>`:(v.nat||v.sim?` · <span style="color:#d8a200">partial</span>`:""));
+  document.querySelectorAll(".choices button").forEach(btn=>
+    btn.classList.toggle("picked", v[btn.dataset.kind]===btn.dataset.side));
+  $("prev").disabled=idx===0;
+  const allDone = nDone===tot && sDone===tot;
+  $("done").style.display=allDone?"block":"none";
+  if(allDone)$("done").innerHTML=`✅ <b>All ${tot} items tagged on both axes.</b> Click ⬇ my votes (CSV) to export.`;
+  renderTally();
+}
+
+let MODELS=null;
+function renderTally(){
+  const host=$("tally"); if(!host)return;
+  if(!(M.items[0] && "A_model" in M.items[0])){ host.innerHTML='<div class="muted">Model tally unavailable (blind build).</div>'; return; }
+  if(!MODELS) MODELS=[...new Set(M.items.flatMap(it=>[it.A_model,it.B_model]))].sort();
+  const [m0,m1]=MODELS, byId={}; M.items.forEach(it=>byId[it.item_id]=it);
+  const b=bag(), t={nat:{},sim:{}};
+  for(const k of ["nat","sim"]) t[k]={[m0]:0,[m1]:0,tie:0};
+  for(const iid in b){const it=byId[iid]; if(!it)continue; const v=b[iid];
+    for(const k of ["nat","sim"]){const s=v[k]; if(!s)continue;
+      const w = s==="tie"?"tie":(s==="A"?it.A_model:it.B_model); if(w in t[k]) t[k][w]++;}}
+  const wr=(c)=>{const d=c[m0]+c[m1]; return d? (100*c[m0]/d).toFixed(0)+"%" : "—";};
+  const rowFor=(label,c)=>`<tr><td class="ax">${label}</td><td class="m0">${c[m0]}</td>`
+    +`<td class="m1">${c[m1]}</td><td>${c.tie}</td><td>${wr(c)}</td></tr>`;
+  host.innerHTML=`<table class="tally">`
+    +`<tr><th>axis</th><th class="m0">${m0}</th><th class="m1">${m1}</th><th>tie</th><th>${m0} win%</th></tr>`
+    +rowFor("naturalness",t.nat)+rowFor("speaker similarity",t.sim)+`</table>`;
+}
+
+function choose(kind,side){
+  const it=M.items[ORDER[idx]], v=(bag()[it.item_id] ||= {});
+  v[kind]=side; v.ts=new Date().toISOString(); persist();
+  if(complete(v) && idx<ORDER.length-1) idx=firstIncomplete();   // both answered -> jump on
+  render();
+}
+
+function exportCSV(){
+  const rows=[["account","axis","item_id","choice","winner","ts"]];
+  const byId={}; M.items.forEach(it=>byId[it.item_id]=it);
+  const b=bag();
+  for(const iid of Object.keys(b)){
+    const it=byId[iid]; if(!it)continue; const v=b[iid];
+    for(const [k,axis] of AXES){
+      const side=v[k]; if(!side)continue;
+      const winner = side==="tie" ? "tie"
+        : ("A_model" in it ? (side==="A"?it.A_model:it.B_model) : "hidden");
+      rows.push([account,axis,iid,side,winner,v.ts||""]);
+    }
+  }
+  const csv=rows.map(r=>r.map(c=>/[",\n]/.test(c)?'"'+String(c).replace(/"/g,'""')+'"':c).join(",")).join("\n");
+  const blob=new Blob([csv],{type:"text/csv"}),url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download=`votes_${account}.csv`;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+
+document.querySelectorAll(".choices button").forEach(btn=>btn.onclick=()=>choose(btn.dataset.kind,btn.dataset.side));
+$("prev").onclick=()=>{idx--;render()};
+$("next").onclick=()=>{if(idx<ORDER.length-1)idx++;render()};
+$("jump").onclick=()=>{idx=firstIncomplete();render()};
+$("dl").onclick=exportCSV;
+$("acct").onchange=e=>{account=e.target.value;persist();ORDER=orderFor(account,M.items.length);idx=firstIncomplete();render()};
+$("addAcct").onclick=()=>{const n=(prompt("New tagger name:")||"").trim();if(!n)return;
+  if(!accounts.includes(n))accounts.push(n);account=n;persist();renderAccounts();
+  ORDER=orderFor(account,M.items.length);idx=firstIncomplete();render()};
+document.addEventListener("keydown",e=>{if(/input|select|textarea/i.test(e.target.tagName))return;
+  if(e.key==="ArrowRight")$("next").click();else if(e.key==="ArrowLeft")$("prev").click()});
+
+$("newtab").href=location.href;
+renderAccounts();
+fetch("manifest.json").then(r=>r.json()).then(m=>{M=m;ORDER=orderFor(account,M.items.length);idx=firstIncomplete();render()})
+  .catch(e=>{$("prompt").textContent="Could not load manifest.json — "+e});
+</script>
+</body>
+</html>

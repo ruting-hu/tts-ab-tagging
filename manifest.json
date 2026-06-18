@@ -1,0 +1,366 @@
+{
+"pair_tag": "set_001",
+"n": 40,
+"items": [
+{
+"item_id": "item_000",
+"text": "Got it. Just to make sure we help you correctly \u2014 is your query about business insurance?",
+"ref": "audio/r/30d193c01f3ee76b.wav",
+"A": "audio/c/b2bfbf443bf1ed0c.wav",
+"B": "audio/c/dfb7db2a715b4b14.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_001",
+"text": "Sure, before we proceed with the cancellation, could you please confirm if you've had your policy with us for more than a year?",
+"ref": "audio/r/e2945eb3a1beab69.wav",
+"A": "audio/c/30a6ed73a4e476b1.wav",
+"B": "audio/c/cda9af3a94cf12e2.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_002",
+"text": "Sure, I can help with that. Could you please specify what you need assistance with regarding the motograms?",
+"ref": "audio/r/20fe81bc5f5cf9b3.wav",
+"A": "audio/c/92cb37289867b4f8.wav",
+"B": "audio/c/ffb1304475083051.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_003",
+"text": "Thank you for letting me know. To assist you better, could you please confirm if you've had your policy with us for more than a year?",
+"ref": "audio/r/8c7a5ca8408a01c8.wav",
+"A": "audio/c/187b8b612576fc87.wav",
+"B": "audio/c/ad6a3eb1f3731798.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_004",
+"text": "I'm having a bit of trouble hearing your ID number clearly, Fundesaho. Could you please say it again slowly for me, please?",
+"ref": "audio/r/ada7c546ae702de4.wav",
+"A": "audio/c/bb7767ab7bdc7ecf.wav",
+"B": "audio/c/32eb648fb85f2bf0.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_005",
+"text": "Thank you for confirming that it's related to a vehicle. Before we proceed, is your query relating to business insurance?",
+"ref": "audio/r/b836498c31ef0f0a.wav",
+"A": "audio/c/68feea6457c74716.wav",
+"B": "audio/c/a54297d383f21fa9.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_006",
+"text": "I understand you're looking to cancel your policy. Can you confirm if you've had your policy with us for more than a year?",
+"ref": "audio/r/d330d684afd8d9af.wav",
+"A": "audio/c/bfb176bdf8a20d0c.wav",
+"B": "audio/c/c33b1c2fb9cc3cc4.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_007",
+"text": "I understand your concern. Let's get that sorted out for you. I'm running the process to amend your details.",
+"ref": "audio/r/c816c2527ef167c9.wav",
+"A": "audio/c/c6bcb2db2ec3dc5b.wav",
+"B": "audio/c/cce64db1fc7f0ffc.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_008",
+"text": "To assist you better, Cred, I'll need to verify your identity. Could you please provide me with your South African ID number?",
+"ref": "audio/r/65d7bb88adc6d316.wav",
+"A": "audio/c/6f581c95231148c5.wav",
+"B": "audio/c/3f2a84b258251036.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_009",
+"text": "I see, you're reporting an incident involving your car. Is your query relating to business insurance?",
+"ref": "audio/r/c30b80d1f50fb09d.wav",
+"A": "audio/c/7fa513777def3754.wav",
+"B": "audio/c/b88da0ca3607d1cc.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_010",
+"text": "To assist you with your vehicle insurance enquiry, I'll need to verify your identity. Could you please provide me with your South African ID number?",
+"ref": "audio/r/3a09b437e711e945.wav",
+"A": "audio/c/c48de78751a86d2a.wav",
+"B": "audio/c/1511893656cd000a.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_011",
+"text": "Thank you for letting me know about your cashback inquiry. Before we proceed, is your query relating to business insurance?",
+"ref": "audio/r/6dffd77d5aa6f326.wav",
+"A": "audio/c/1d984656c9e37350.wav",
+"B": "audio/c/431cb055c9d945d8.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_012",
+"text": "Thank you for letting me know about the car warranty. Is your query relating to business insurance?",
+"ref": "audio/r/513b39d143ade682.wav",
+"A": "audio/c/801181e007c52070.wav",
+"B": "audio/c/25432c89ac8e5d5f.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_013",
+"text": "It sounds like your claim might be related to a non-motor vehicle, such as phone insurance. Is that correct?",
+"ref": "audio/r/6a463d7eda48dceb.wav",
+"A": "audio/c/1be42ebf5e414419.wav",
+"B": "audio/c/337fc2cf3a7c478b.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_014",
+"text": "I can help with that. Could you clarify if you're looking to make a change or have a question about your existing contract?",
+"ref": "audio/r/94ae3626d1d5cc78.wav",
+"A": "audio/c/4a59fa1901a04480.wav",
+"B": "audio/c/620ad6330ce1a900.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_015",
+"text": "To proceed with your request, could you please let me know if you've had your policy for more than a year?",
+"ref": "audio/r/4eb63bf0961d98b2.wav",
+"A": "audio/c/ae5d3c99a981da24.wav",
+"B": "audio/c/0afc55c87ea2cffa.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_016",
+"text": "I see, it sounds like you have some questions about a message you received. How can I assist you today with your query?",
+"ref": "audio/r/7a1a8b03edf2556d.wav",
+"A": "audio/c/029f7977b75c6b71.wav",
+"B": "audio/c/ad43aedb243cc552.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_017",
+"text": "It seems there might have been a slight misunderstanding. To clarify, are you calling about business insurance or personal insurance like car insurance?",
+"ref": "audio/r/df1984ff259dcd35.wav",
+"A": "audio/c/cfa9ea8fb3359c36.wav",
+"B": "audio/c/9a6a32768e15af4a.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_018",
+"text": "Based on your response, I will route your query to the personal insurance team for further assistance.",
+"ref": "audio/r/599437f2f0e4b8c9.wav",
+"A": "audio/c/0b989202afa6a75e.wav",
+"B": "audio/c/2c6a271892aa6ab1.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_019",
+"text": "Great news! We\u2019re ready to help you explore new possibilities. Are you looking to renew an existing policy?",
+"ref": "audio/r/e2028487ec13c155.wav",
+"A": "audio/c/719e39507e4a9d90.wav",
+"B": "audio/c/c8e52342308f72e6.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_020",
+"text": "I see, it sounds like you have a query about your billing. I'll note that down. Could you provide more details so I can assist you better?",
+"ref": "audio/r/bb673ceff6b5c31b.wav",
+"A": "audio/c/ad7fbfd64a954c74.wav",
+"B": "audio/c/147d736c97a2b6ef.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_021",
+"text": "Thank you for letting me know about your intention to cancel your business policy. Could you please confirm if you've had this policy for more than a year?",
+"ref": "audio/r/7a3c352f7e7f27da.wav",
+"A": "audio/c/0d8d9167ade8123a.wav",
+"B": "audio/c/4c4705322de8860e.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_022",
+"text": "I understand you\u2019re looking for a confirmation letter. Just to make sure we help you correctly \u2014 is your query about business insurance?",
+"ref": "audio/r/cf06514a9bba051e.wav",
+"A": "audio/c/772546d50050f19a.wav",
+"B": "audio/c/f9ea45c5858293c5.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_023",
+"text": "Absolutely, we can handle everything over the phone. Just to clarify, is your query relating to business insurance?",
+"ref": "audio/r/e2628571eda5e62b.wav",
+"A": "audio/c/921007dc8a023836.wav",
+"B": "audio/c/c1136950e99f988d.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_024",
+"text": "I see you\u2019re having trouble with the app. Let\u2019s focus on why you called regarding your claim. How can I assist you today?",
+"ref": "audio/r/f660ac397ec9d619.wav",
+"A": "audio/c/f9c05b6845d6bc3e.wav",
+"B": "audio/c/4ee2c95a3464c625.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_025",
+"text": "Sure, I can help with that. Could you please specify if you're looking to inquire about an existing policy or interested in getting a new quote?",
+"ref": "audio/r/5d413fceb5362ff8.wav",
+"A": "audio/c/b23406b99315d3b9.wav",
+"B": "audio/c/eca52a55cbdeb946.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_026",
+"text": "I apologize if my previous question was unclear. Could you please clarify if this issue is related to business insurance?",
+"ref": "audio/r/2bdb074ec37a48b3.wav",
+"A": "audio/c/6ce8e2816d95a1b1.wav",
+"B": "audio/c/6f61d24fc3ef8f66.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_027",
+"text": "Of course, Mr. Dovo. I can assist with that. Please go ahead and provide your ID number.",
+"ref": "audio/r/ef1c51bea2f97cde.wav",
+"A": "audio/c/45c512c998952bfc.wav",
+"B": "audio/c/d0a1b205844a750b.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_028",
+"text": "Sure, I can assist with that. Could you clarify if you're looking to process an amendment or have a query related to your home insurance?",
+"ref": "audio/r/2ec0837e70dcc980.wav",
+"A": "audio/c/3d1c8d30d6321f9d.wav",
+"B": "audio/c/a44f4120b03f3c85.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_029",
+"text": "Thank you for letting me know it's a motor claim. Is your query relating to business insurance?",
+"ref": "audio/r/c547e9071953e990.wav",
+"A": "audio/c/22ecdd296b6196fb.wav",
+"B": "audio/c/7ec5f41236740b18.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_030",
+"text": "Alright, Freddie, I have everything I need for now. Could you tell me what brought you to call us today?",
+"ref": "audio/r/2a811f3a4eb482fa.wav",
+"A": "audio/c/bade2d6d3abd0718.wav",
+"B": "audio/c/aeb6350131cb7df3.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_031",
+"text": "I see, you're looking for an extension on a courtesy car. Is there anything specific you need assistance with regarding this?",
+"ref": "audio/r/1d6f0618f5eeeb49.wav",
+"A": "audio/c/c6d858236d428b5d.wav",
+"B": "audio/c/61fdda37e356d9ca.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_032",
+"text": "Got it. It sounds like you need to process an amendment to your policy. Is there anything else you need help with?",
+"ref": "audio/r/061f41ff4286174b.wav",
+"A": "audio/c/fa225feaf48c74c4.wav",
+"B": "audio/c/620b17547e8b13ea.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_033",
+"text": "Thank you for letting me know it's related to a car. Before we proceed, is your query also related to business insurance?",
+"ref": "audio/r/53b560136063758f.wav",
+"A": "audio/c/49a29fa6b44c4ffc.wav",
+"B": "audio/c/bd974bade2075d4f.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_034",
+"text": "Hello, I think there might have been a slight misunderstanding. How can I assist you today?",
+"ref": "audio/r/3f2e6fe7de22093e.wav",
+"A": "audio/c/aaee311704abdab4.wav",
+"B": "audio/c/814f1022fb05bae9.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_035",
+"text": "Sima, I have your details now. Could you tell me a bit more about what you'd like to check regarding your insurance?",
+"ref": "audio/r/27943fc819c5be24.wav",
+"A": "audio/c/419b7edef09e5fd6.wav",
+"B": "audio/c/b8a8019e97177af9.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_036",
+"text": "Got it. Sounds like you're looking to insure your car. Is this related to an existing policy?",
+"ref": "audio/r/4801b58b0e8544d4.wav",
+"A": "audio/c/e0d3916be4d4392c.wav",
+"B": "audio/c/3818766dc4384d38.wav",
+"A_model": "zonos2",
+"B_model": "qwen"
+},
+{
+"item_id": "item_037",
+"text": "Sure, I can help with that. Are you looking to understand more about your current premium or are you considering changes?",
+"ref": "audio/r/44b2cbe430882311.wav",
+"A": "audio/c/406e332748b966de.wav",
+"B": "audio/c/2eae5d929425e681.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_038",
+"text": "Hello Bongwan, I'm doing well, thank you for asking. How can I assist you today?",
+"ref": "audio/r/ae0a3b85622642c2.wav",
+"A": "audio/c/dd1de95f4622299c.wav",
+"B": "audio/c/da79295867892942.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+},
+{
+"item_id": "item_039",
+"text": "Of course, we can switch to Afrikaans. How can I assist you today? Is there something specific you need help with?",
+"ref": "audio/r/3411c83a6acdaa0a.wav",
+"A": "audio/c/3119bec1259809c7.wav",
+"B": "audio/c/deb7d0ee9afbd64e.wav",
+"A_model": "qwen",
+"B_model": "zonos2"
+}
+]
+}
